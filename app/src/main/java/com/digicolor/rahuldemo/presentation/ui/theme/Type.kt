@@ -1,4 +1,4 @@
-package com.digicolor.rahuldemo.ui.theme
+package com.digicolor.rahuldemo.presentation.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

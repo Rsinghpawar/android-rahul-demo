@@ -1,4 +1,4 @@
-package com.digicolor.rahuldemo
+package com.digicolor.rahuldemo.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,7 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.digicolor.rahuldemo.ui.theme.RahulDemoTheme
+import com.digicolor.rahuldemo.presentation.ui.theme.RahulDemoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

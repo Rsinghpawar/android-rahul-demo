@@ -1,4 +1,4 @@
-package com.digicolor.rahuldemo.ui.theme
+package com.digicolor.rahuldemo.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
