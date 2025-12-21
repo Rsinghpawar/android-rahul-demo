@@ -1,0 +1,17 @@
+package com.digicolor.rahuldemo.presentation.ui.screens.portfolio
+
+import com.digicolor.rahuldemo.domain.model.Holding
+import com.digicolor.rahuldemo.domain.model.PortfolioSummary
+
+data class PortfolioUiState(
+    val holdings: List<Holding> = emptyList(),
+    val isLoading: Boolean = false,
+    val error: String? = null,
+    val isExpanded: Boolean = false,
+    val summary: PortfolioSummary? = null,
+    val selectedTab: PortfolioTab = PortfolioTab.HOLDINGS
+)
+
+enum class PortfolioTab {
+    POSITIONS, HOLDINGS
+}

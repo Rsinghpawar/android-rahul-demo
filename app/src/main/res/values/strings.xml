@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">rahulDemo</string>
+    <!-- Currency symbols -->
+    <string name="currency_symbol_rupee">₹</string>
+    <string name="currency_symbol_dollar">$</string>
+
+    <!-- Currency formats -->
+    <string name="currency_format_with_symbol">%1$s %2$s</string>
+    <string name="currency_format_negative">-%1$s %2$s</string>
+
+    <!-- Labels -->
+    <string name="label_ltp">LTP: </string>
+    <string name="label_net_qty">NET QTY: </string>
+    <string name="label_pnl">P&amp;L: </string>
+    <string name="profit_loss"><![CDATA[Profit & Loss*]]></string>
 </resources>
