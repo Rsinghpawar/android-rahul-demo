@@ -18,8 +18,7 @@ class CalculatePortfolioSummaryUseCase @Inject constructor() {
             0.0
         }
 
-        // Today's PnL is calculated as (LTP - Close Price) * Qty
-        val todayPnL = holdings.sumOf { (it.closePrice - it.lastTradedPrice) * it.quantity }
+        val todayPnL = holdings.sumOf { (it.lastTradedPrice - it.closePrice) * it.quantity }
         val yesterdayValue = holdings.sumOf { it.closePrice * it.quantity }
         val todayPnLPercentage = if (yesterdayValue != 0.0) {
             (todayPnL / yesterdayValue) * 100
