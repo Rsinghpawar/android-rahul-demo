@@ -13,4 +13,6 @@
     <string name="label_net_qty">NET QTY: </string>
     <string name="label_pnl">P&amp;L: </string>
     <string name="profit_loss"><![CDATA[Profit & Loss*]]></string>
+    <string name="title_portfolio">Portfolio</string>
+    <string name="error_no_internet">No Internet Connection</string>
 </resources>
