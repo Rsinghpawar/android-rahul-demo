@@ -6,6 +6,7 @@ import com.digicolor.rahuldemo.domain.usecase.CalculatePortfolioSummaryUseCase
 import com.digicolor.rahuldemo.domain.usecase.GetUserHoldingsUseCase
 import com.digicolor.rahuldemo.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +16,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 @HiltViewModel
 class PortfolioViewModel @Inject constructor(
@@ -31,6 +33,14 @@ class PortfolioViewModel @Inject constructor(
             initialValue = PortfolioUiState(isLoading = true)
         )
 
+    fun onAction(action: PortfolioAction) {
+        when (action) {
+            is PortfolioAction.Refresh -> onRefresh()
+            is PortfolioAction.TabSelected -> onTabSelected(action.tab)
+            is PortfolioAction.ToggleSummary -> toggleSummary()
+        }
+    }
+
     private fun loadHoldings() {
         viewModelScope.launch {
             getUserHoldingsUseCase().collectLatest { resource ->
@@ -44,13 +54,15 @@ class PortfolioViewModel @Inject constructor(
                             holdings = holdings,
                             summary = calculatePortfolioSummaryUseCase(holdings),
                             isLoading = false,
+                            isRefreshing = false,
                             error = null
                         )
                     }
                     is Resource.Error -> {
                         _uiState.value = _uiState.value.copy(
                             error = resource.message,
-                            isLoading = false
+                            isLoading = false,
+                            isRefreshing = false
                         )
                     }
                 }
@@ -58,11 +70,23 @@ class PortfolioViewModel @Inject constructor(
         }
     }
 
-    fun onTabSelected(tab: PortfolioTab) {
+    private fun onRefresh() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isRefreshing = true)
+            if (_uiState.value.selectedTab == PortfolioTab.POSITIONS) {
+                delay(2000)
+                _uiState.value = _uiState.value.copy(isRefreshing = false)
+            } else {
+                loadHoldings()
+            }
+        }
+    }
+
+    private fun onTabSelected(tab: PortfolioTab) {
         _uiState.value = _uiState.value.copy(selectedTab = tab)
     }
 
-    fun toggleSummary() {
+    private fun toggleSummary() {
         _uiState.value = _uiState.value.copy(isExpanded = !_uiState.value.isExpanded)
     }
 }

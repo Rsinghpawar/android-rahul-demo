@@ -68,11 +68,11 @@ fun PortfolioTopBar() {
                     imageVector = Icons.Default.AccountCircle,
                     contentDescription = null,
                     tint = Color.White,
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier.size(Dimens.topBarIconSize)
                 )
-                Spacer(modifier = Modifier.size(12.dp))
+                Spacer(modifier = Modifier.size(Dimens.space12))
                 HeadingText(
-                    text = "Portfolio",
+                    text = stringResource(R.string.title_portfolio),
                     color = Color.White
                 )
             }
@@ -82,14 +82,16 @@ fun PortfolioTopBar() {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_arrow_up_down),
                     contentDescription = null,
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.size(Dimens.iconSize)
                 )
             }
             IconButton(onClick = { /* TODO */ }) {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
-                    tint = Color.White
+                    tint = Color.White,
+                    modifier = Modifier.size(Dimens.iconSize)
                 )
             }
         },
@@ -152,15 +154,17 @@ fun PortfolioSummaryView(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable(indication = null, interactionSource =  remember { MutableInteractionSource() }) { onToggle() }
+                    .clickable(
+                        indication = null,
+                        interactionSource = remember { MutableInteractionSource() }) { onToggle() }
                     .padding(horizontal = Dimens.listItemHorizontal, vertical = Dimens.space12)
             ) {
                 AnimatedVisibility(visible = state.isExpanded) {
                     Column {
-                        SummaryRow(label = "Current value*", value = summary.currentValue)
-                        SummaryRow(label = "Total investment*", value = summary.totalInvestment)
+                        SummaryRow(label = stringResource(R.string.current_value), value = summary.currentValue)
+                        SummaryRow(label = stringResource(R.string.total_investment), value = summary.totalInvestment)
                         SummaryRow(
-                            label = "Today's Profit & Loss*",
+                            label = stringResource(R.string.today_s_profit_loss),
                             value = summary.todayPnL,
                             isFinancial = true
                         )

@@ -6,6 +6,7 @@ import com.digicolor.rahuldemo.domain.model.PortfolioSummary
 data class PortfolioUiState(
     val holdings: List<Holding> = emptyList(),
     val isLoading: Boolean = false,
+    val isRefreshing: Boolean = false,
     val error: String? = null,
     val isExpanded: Boolean = false,
     val summary: PortfolioSummary? = null,
@@ -14,4 +15,10 @@ data class PortfolioUiState(
 
 enum class PortfolioTab {
     POSITIONS, HOLDINGS
+}
+
+sealed class PortfolioAction {
+    object Refresh : PortfolioAction()
+    data class TabSelected(val tab: PortfolioTab) : PortfolioAction()
+    object ToggleSummary : PortfolioAction()
 }
