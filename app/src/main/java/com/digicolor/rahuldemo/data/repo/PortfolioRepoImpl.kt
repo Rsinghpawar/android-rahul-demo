@@ -15,7 +15,7 @@ class PortfolioRepoImpl @Inject constructor(
     private val portfolioApi: PortfolioApi
 ) : PortfolioRepo {
 
-    override suspend fun getHoldings(): Flow<Resource<List<Holding>>> = flow {
+    override fun getHoldings(): Flow<Resource<List<Holding>>> = flow {
         emit(Resource.Loading)
         try {
             val res = portfolioApi.getHoldings()

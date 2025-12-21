@@ -94,7 +94,7 @@ fun PortfolioTopBar() {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = DarkBlue
+            containerColor = MaterialTheme.colorScheme.primary
         )
     )
 }

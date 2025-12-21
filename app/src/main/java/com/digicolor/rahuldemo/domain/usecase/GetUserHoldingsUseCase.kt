@@ -9,5 +9,5 @@ import javax.inject.Inject
 class GetUserHoldingsUseCase @Inject constructor(
     private val portfolioRepo: PortfolioRepo
 ) {
-    suspend operator fun invoke(): Flow<Resource<List<Holding>>> = portfolioRepo.getHoldings()
+    operator fun invoke(): Flow<Resource<List<Holding>>> = portfolioRepo.getHoldings()
 }

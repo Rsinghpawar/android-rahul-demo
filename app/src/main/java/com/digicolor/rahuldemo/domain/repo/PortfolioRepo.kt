@@ -5,5 +5,5 @@ import com.digicolor.rahuldemo.util.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface PortfolioRepo {
-    suspend fun getHoldings(): Flow<Resource<List<Holding>>>
+    fun getHoldings(): Flow<Resource<List<Holding>>>
 }
