@@ -18,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -40,9 +41,7 @@ fun PortfolioRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     PortfolioScreen(
         state = uiState,
-        onTabSelected = viewModel::onTabSelected,
-        onToggleSummary = viewModel::toggleSummary,
-        onRefresh = viewModel::onRefresh
+        onAction = viewModel::onAction
     )
 }
 
@@ -50,19 +49,17 @@ fun PortfolioRoute(
 @Composable
 fun PortfolioScreen(
     state: PortfolioUiState,
-    onTabSelected: (PortfolioTab) -> Unit = {},
-    onToggleSummary: () -> Unit = {},
-    onRefresh: () -> Unit = {}
+    onAction: (PortfolioAction) -> Unit = {}
 ) {
     Scaffold(
         topBar = { PortfolioTopBar() },
         bottomBar = {
-            PortfolioSummaryView(state = state, onToggle = onToggleSummary)
+            PortfolioSummaryView(state = state, onToggle = { onAction(PortfolioAction.ToggleSummary) })
         }
     ) { padding ->
         PullToRefreshBox(
             isRefreshing = state.isRefreshing,
-            onRefresh = onRefresh,
+            onRefresh = { onAction(PortfolioAction.Refresh) },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
@@ -70,7 +67,7 @@ fun PortfolioScreen(
             Column(modifier = Modifier.fillMaxSize()) {
                 PortfolioTabs(
                     selectedTab = state.selectedTab,
-                    onTabSelected = onTabSelected
+                    onTabSelected = { onAction(PortfolioAction.TabSelected(it)) }
                 )
 
                 AnimatedContent(

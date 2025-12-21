@@ -15,4 +15,7 @@
     <string name="profit_loss"><![CDATA[Profit & Loss*]]></string>
     <string name="title_portfolio">Portfolio</string>
     <string name="error_no_internet">No Internet Connection</string>
+    <string name="current_value">Current value*</string>
+    <string name="total_investment">Total investment*</string>
+    <string name="today_s_profit_loss"><![CDATA[Today\'s Profit & Loss*]]></string>
 </resources>

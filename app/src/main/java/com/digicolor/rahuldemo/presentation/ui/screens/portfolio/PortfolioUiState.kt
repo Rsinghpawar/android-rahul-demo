@@ -16,3 +16,9 @@ data class PortfolioUiState(
 enum class PortfolioTab {
     POSITIONS, HOLDINGS
 }
+
+sealed class PortfolioAction {
+    object Refresh : PortfolioAction()
+    data class TabSelected(val tab: PortfolioTab) : PortfolioAction()
+    object ToggleSummary : PortfolioAction()
+}

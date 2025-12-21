@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
 @HiltViewModel
 class PortfolioViewModel @Inject constructor(
     private val getUserHoldingsUseCase: GetUserHoldingsUseCase,
@@ -32,6 +33,14 @@ class PortfolioViewModel @Inject constructor(
             initialValue = PortfolioUiState(isLoading = true)
         )
 
+    fun onAction(action: PortfolioAction) {
+        when (action) {
+            is PortfolioAction.Refresh -> onRefresh()
+            is PortfolioAction.TabSelected -> onTabSelected(action.tab)
+            is PortfolioAction.ToggleSummary -> toggleSummary()
+        }
+    }
+
     private fun loadHoldings() {
         viewModelScope.launch {
             getUserHoldingsUseCase().collectLatest { resource ->
@@ -40,7 +49,7 @@ class PortfolioViewModel @Inject constructor(
                         _uiState.value = _uiState.value.copy(isLoading = true)
                     }
                     is Resource.Success -> {
-                        val holdings = resource.data ?: emptyList()
+                        val holdings = resource.data
                         _uiState.value = _uiState.value.copy(
                             holdings = holdings,
                             summary = calculatePortfolioSummaryUseCase(holdings),
@@ -61,7 +70,7 @@ class PortfolioViewModel @Inject constructor(
         }
     }
 
-    fun onRefresh() {
+    private fun onRefresh() {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isRefreshing = true)
             if (_uiState.value.selectedTab == PortfolioTab.POSITIONS) {
@@ -73,11 +82,11 @@ class PortfolioViewModel @Inject constructor(
         }
     }
 
-    fun onTabSelected(tab: PortfolioTab) {
+    private fun onTabSelected(tab: PortfolioTab) {
         _uiState.value = _uiState.value.copy(selectedTab = tab)
     }
 
-    fun toggleSummary() {
+    private fun toggleSummary() {
         _uiState.value = _uiState.value.copy(isExpanded = !_uiState.value.isExpanded)
     }
 }

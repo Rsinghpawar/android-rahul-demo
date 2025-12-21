@@ -12,6 +12,7 @@ object Dimens {
     val space16 = 16.dp
     val space20 = 20.dp
     val space24 = 24.dp
+    val space28 = 28.dp
     val space32 = 32.dp
 
     val roundedCorner = space12
@@ -40,6 +41,7 @@ object Dimens {
 
     /* ---------- Icon & touch targets ---------- */
     val iconSize = 24.dp
+    val topBarIconSize = space28
     val iconPadding = space8
     val minTouchTarget = 48.dp
 
@@ -47,4 +49,3 @@ object Dimens {
     val chipPaddingHorizontal = space8
     val chipPaddingVertical = space4
 }
-
