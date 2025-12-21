@@ -1,19 +1,6 @@
 package com.digicolor.rahuldemo.util
 
 object CurrencyUtils {
-    fun formatCurrency(
-        value: Double,
-        symbol: String,
-        decimalPlaces: Int = 2
-    ): String {
-        return when {
-            value.isNaN() || value.isInfinite() -> "$symbol 0.00"
-            else -> {
-                val formatted = String.format("%.${decimalPlaces}f", value)
-                "$symbol $formatted"
-            }
-        }
-    }
     fun formatFinancialValueIndian(
         value: Double,
         symbol: String,

@@ -7,6 +7,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -14,23 +15,25 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.digicolor.rahuldemo.R
+import com.digicolor.rahuldemo.presentation.theme.DarkBlue
 import com.digicolor.rahuldemo.presentation.theme.RahulDemoTheme
 import com.digicolor.rahuldemo.presentation.theme.customColors
 import com.digicolor.rahuldemo.util.CurrencyUtils
-import com.digicolor.rahuldemo.util.toRupeeString
 
 
 @Composable
 fun HeadingText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified
 ) {
     Text(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.titleLarge,
         maxLines = 1,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
+        color = color
     )
 }
 
@@ -52,26 +55,29 @@ fun PrimaryText(
 @Composable
 fun SecondaryText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Text(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.labelMedium,
-        color = MaterialTheme.colorScheme.onSurfaceVariant
+        color = color
     )
 }
 
 @Composable
 fun ValueText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified
 ) {
     Text(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight.Medium,
+        color = color
     )
 }
 
@@ -92,12 +98,14 @@ fun EmphasisText(
 @Composable
 fun BodyText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = Color.Unspecified
 ) {
     Text(
         text = text,
         modifier = modifier,
-        style = MaterialTheme.typography.bodyMedium
+        style = MaterialTheme.typography.bodyMedium,
+        color = color
     )
 }
 
@@ -114,6 +122,42 @@ fun CaptionText(
     )
 }
 
+@Composable
+fun TabText(
+    text: String,
+    isSelected: Boolean,
+    modifier: Modifier = Modifier,
+    selectedColor: Color = DarkBlue,
+    unselectedColor: Color = Color.Gray
+) {
+    Text(
+        text = text,
+        modifier = modifier,
+        style = MaterialTheme.typography.labelLarge,
+        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal,
+        color = if (isSelected) selectedColor else unselectedColor
+    )
+}
+
+@Composable
+fun PercentageText(
+    value: Double,
+    modifier: Modifier = Modifier,
+    isPnL: Boolean = true
+) {
+    val color = if (isPnL) {
+        if (value >= 0) MaterialTheme.customColors.positiveValue else MaterialTheme.customColors.negativeValue
+    } else {
+        Color.Unspecified
+    }
+    Text(
+        text = " (${String.format("%.2f", value)}%)",
+        modifier = modifier,
+        style = MaterialTheme.typography.bodySmall,
+        color = color,
+        fontSize = 12.sp
+    )
+}
 
 
 @Composable
@@ -238,4 +282,3 @@ fun AppTextPreview() {
         }
     }
 }
-

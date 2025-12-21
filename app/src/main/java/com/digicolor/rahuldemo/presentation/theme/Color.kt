@@ -34,9 +34,6 @@ val OverlayBackground = Color(0xF2FFFFFF) // Semi-transparent white
 val DividerColor = Color(0xFFE0E0E0)
 val BorderColor = Color(0xFFBDBDBD)
 
-// Icon Colors
-val IconPrimary = Color(0xFFFFFFFF)
-val IconSecondary = Color(0xFF757575)
 
 // State Colors
 val SelectedTab = Color(0xFF003366)

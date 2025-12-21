@@ -8,5 +8,10 @@ data class PortfolioUiState(
     val isLoading: Boolean = false,
     val error: String? = null,
     val isExpanded: Boolean = false,
-    val summary: PortfolioSummary? = null
+    val summary: PortfolioSummary? = null,
+    val selectedTab: PortfolioTab = PortfolioTab.HOLDINGS
 )
+
+enum class PortfolioTab {
+    POSITIONS, HOLDINGS
+}

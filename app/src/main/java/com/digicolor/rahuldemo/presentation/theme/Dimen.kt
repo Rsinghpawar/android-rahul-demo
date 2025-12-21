@@ -14,6 +14,8 @@ object Dimens {
     val space24 = 24.dp
     val space32 = 32.dp
 
+    val roundedCorner = space12
+
     val screenHorizontal = space16   // Left / Right padding
     val screenVertical = space12     // Top / Bottom padding
 

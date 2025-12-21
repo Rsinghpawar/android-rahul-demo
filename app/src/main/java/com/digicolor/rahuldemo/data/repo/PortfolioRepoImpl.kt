@@ -9,8 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
-class PortfolioRepoImpl(private val portfolioApi: PortfolioApi) : PortfolioRepo {
+class PortfolioRepoImpl @Inject constructor(
+    private val portfolioApi: PortfolioApi
+) : PortfolioRepo {
 
     override suspend fun getHoldings(): Flow<Resource<List<Holding>>> = flow {
         emit(Resource.Loading)
