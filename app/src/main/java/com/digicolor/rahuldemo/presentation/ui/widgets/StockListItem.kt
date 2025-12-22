@@ -37,12 +37,7 @@ fun StockListItem(holding: Holding, modifier: Modifier = Modifier) {
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
     ) {
-
-        HorizontalDivider(
-            modifier = Modifier.fillMaxWidth(),
-            thickness = Dimens.space2,
-            color = DividerColor
-        )
+        Divider()
         Column(
             Modifier
                 .fillMaxWidth()

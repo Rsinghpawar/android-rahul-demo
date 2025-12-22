@@ -47,7 +47,6 @@ import com.digicolor.rahuldemo.presentation.theme.DarkBlue
 import com.digicolor.rahuldemo.presentation.theme.Dimens
 import com.digicolor.rahuldemo.presentation.theme.Dimens.roundedCorner
 import com.digicolor.rahuldemo.presentation.theme.RahulDemoTheme
-import com.digicolor.rahuldemo.presentation.theme.customColors
 import com.digicolor.rahuldemo.presentation.ui.components.BodyText
 import com.digicolor.rahuldemo.presentation.ui.components.FinancialValueText
 import com.digicolor.rahuldemo.presentation.ui.components.HeadingText
@@ -96,7 +95,7 @@ fun PortfolioTopBar() {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary
+            containerColor = DarkBlue
         )
     )
 }
@@ -108,16 +107,16 @@ fun PortfolioTabs(
 ) {
     TabRow(
         selectedTabIndex = selectedTab.ordinal,
-        containerColor = Color.White,
+        containerColor = MaterialTheme.colorScheme.surface,
         contentColor = DarkBlue,
         indicator = { tabPositions ->
             TabRowDefaults.SecondaryIndicator(
                 Modifier.tabIndicatorOffset(tabPositions[selectedTab.ordinal]),
-                color = DarkBlue
+                color = MaterialTheme.colorScheme.primary
             )
         },
         divider = {
-            HorizontalDivider(thickness = 1.dp, color = Color.LightGray)
+            Divider()
         }
     ) {
         PortfolioTab.entries.forEach { tab ->
@@ -127,9 +126,10 @@ fun PortfolioTabs(
                 text = {
                     TabText(
                         text = tab.name,
-                        isSelected = selectedTab == tab
+                        isSelected = selectedTab == tab,
                     )
-                }
+                },
+
             )
         }
     }
