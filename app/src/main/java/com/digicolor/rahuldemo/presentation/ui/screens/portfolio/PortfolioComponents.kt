@@ -112,11 +112,11 @@ fun PortfolioTabs(
         indicator = { tabPositions ->
             TabRowDefaults.SecondaryIndicator(
                 Modifier.tabIndicatorOffset(tabPositions[selectedTab.ordinal]),
-                color = DarkBlue
+                color = MaterialTheme.colorScheme.primary
             )
         },
         divider = {
-            HorizontalDivider(thickness = 1.dp, color = Color.LightGray)
+            Divider()
         }
     ) {
         PortfolioTab.entries.forEach { tab ->
