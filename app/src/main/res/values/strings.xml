@@ -10,7 +10,6 @@
     <string name="profit_loss"><![CDATA[Profit & Loss*]]></string>
     <string name="title_portfolio">Portfolio</string>
     <string name="error_no_internet">No Internet Connection</string>
-    <string name="error_server">Something went wrong on our end</string>
     <string name="error_unknown">An unknown error occurred</string>
     <string name="action_dismiss">Dismiss</string>
     <string name="current_value">Current value*</string>

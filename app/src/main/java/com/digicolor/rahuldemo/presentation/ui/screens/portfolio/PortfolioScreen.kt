@@ -215,8 +215,8 @@ fun ErrorView(error: ErrorType?) {
     SecondaryText(
         text = when (error) {
             ErrorType.NO_INTERNET -> stringResource(R.string.error_no_internet)
-            ErrorType.SERVER_ERROR -> "Something went wrong on our end"
-            else -> "An unknown error occurred"
+            ErrorType.SERVER_ERROR -> stringResource(R.string.something_went_wrong_on_our_end)
+            else ->  stringResource(R.string.an_unknown_error_occurred)
         },
     )
 }
