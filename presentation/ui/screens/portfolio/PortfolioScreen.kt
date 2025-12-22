@@ -50,36 +50,28 @@ fun PortfolioRoute(
     snackbarHostState: SnackbarHostState
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    ErrorSnackBar(snackbarHostState, uiState, viewModel)
-
-    PortfolioScreen(
-        state = uiState,
-        onAction = viewModel::onAction
-    )
-}
-
-@Composable
-fun ErrorSnackBar(
-    snackBarHostState: SnackbarHostState,
-    uiState: PortfolioUiState,
-    viewModel: PortfolioViewModel
-) {
+    
     val noInternetMessage = stringResource(R.string.error_no_internet)
-    val serverErrorMessage = stringResource(R.string.something_went_wrong_on_our_end)
-    val unknownErrorMessage = stringResource(R.string.an_unknown_error_occurred)
+    val serverErrorMessage = "Something went wrong on our end"
+    val unknownErrorMessage = "An unknown error occurred"
 
     LaunchedEffect(uiState.error) {
+        // Only show snackbar if holdings list is NOT empty
         if (uiState.error != null && uiState.holdings.isNotEmpty()) {
             val message = when (uiState.error) {
                 ErrorType.NO_INTERNET -> noInternetMessage
                 ErrorType.SERVER_ERROR -> serverErrorMessage
                 else -> unknownErrorMessage
             }
-            snackBarHostState.showSnackbar(message)
+            snackbarHostState.showSnackbar(message)
             viewModel.onAction(PortfolioAction.ErrorConsumed)
         }
     }
+
+    PortfolioScreen(
+        state = uiState,
+        onAction = viewModel::onAction
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -127,7 +119,7 @@ fun PortfolioScreen(
                 ) { targetTab ->
                     when (targetTab) {
                         PortfolioTab.POSITIONS -> {
-                            NoOrdersPlaceholder()
+                            PositionsView()
                         }
 
                         PortfolioTab.HOLDINGS -> {
@@ -171,17 +163,13 @@ fun HoldingsView(state: PortfolioUiState) {
             }
 
             else -> {
-                if (state.holdings.isNotEmpty()) {
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(
-                            items = state.holdings,
-                            key = { it.symbol },
-                        ) { holding ->
-                            StockListItem(holding)
-                        }
+                LazyColumn(modifier = Modifier.fillMaxSize()) {
+                    items(
+                        items = state.holdings,
+                        key = { it.symbol },
+                    ) { holding ->
+                        StockListItem(holding)
                     }
-                } else {
-                    NoOrdersPlaceholder()
                 }
             }
         }
@@ -189,7 +177,7 @@ fun HoldingsView(state: PortfolioUiState) {
 }
 
 @Composable
-fun NoOrdersPlaceholder() {
+fun PositionsView() {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -197,7 +185,7 @@ fun NoOrdersPlaceholder() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LottieLoader(R.raw.empty_ghost) // Using existing dummy for positions
+        LottieLoader(R.raw.loading_animation) // Using existing dummy for positions
         BodyText(text = "No orders yet", color = Color.Gray)
     }
 }

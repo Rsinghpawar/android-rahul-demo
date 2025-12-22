@@ -127,8 +127,8 @@ fun TabText(
     text: String,
     isSelected: Boolean,
     modifier: Modifier = Modifier,
-    selectedColor: Color = DarkBlue,
-    unselectedColor: Color = Color.Gray
+    selectedColor: Color = MaterialTheme.colorScheme.primary,
+    unselectedColor: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Text(
         text = text,

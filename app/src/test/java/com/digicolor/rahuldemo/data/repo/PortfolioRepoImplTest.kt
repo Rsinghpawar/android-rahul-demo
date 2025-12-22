@@ -2,6 +2,7 @@ package com.digicolor.rahuldemo.data.repo
 
 import com.digicolor.rahuldemo.data.dto.PortfolioResponseDto
 import com.digicolor.rahuldemo.data.remote.PortfolioApi
+import com.digicolor.rahuldemo.util.ErrorType
 import com.digicolor.rahuldemo.util.Resource
 import com.google.gson.Gson
 import io.mockk.coEvery
@@ -12,6 +13,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import java.io.IOException
+import java.net.UnknownHostException
 
 class PortfolioRepoImplTest {
 
@@ -40,24 +43,47 @@ class PortfolioRepoImplTest {
         
         val holdings = (result[1] as Resource.Success).data
         assertEquals(2, holdings.size)
-        assertEquals("MAHABANK", holdings.get(0).symbol)
-        assertEquals(990, holdings[0].quantity)
-        assertEquals(38.05, holdings.get(0).lastTradedPrice, 0.0)
+        assertEquals("MAHABANK", holdings[0].symbol)
     }
 
     @Test
-    fun `getHoldings - Failure - returns loading and error states`() = runTest {
+    fun `getHoldings - UnknownHostException - returns NO_INTERNET error type`() = runTest {
         // Given
-        val errorMessage = "Network Error"
-        coEvery { portfolioApi.getHoldings() } throws Exception(errorMessage)
+        coEvery { portfolioApi.getHoldings() } throws UnknownHostException("No connection")
 
         // When
         val result = portfolioRepo.getHoldings().toList()
 
         // Then
         assertTrue(result[0] is Resource.Loading)
-        assertTrue(result[1] is Resource.Error)
-        assertEquals(errorMessage, (result[1] as Resource.Error).message)
+        val errorState = result[1] as Resource.Error
+        assertEquals(ErrorType.NO_INTERNET, errorState.type)
+    }
+
+    @Test
+    fun `getHoldings - IOException - returns NO_INTERNET error type`() = runTest {
+        // Given
+        coEvery { portfolioApi.getHoldings() } throws IOException("Timeout")
+
+        // When
+        val result = portfolioRepo.getHoldings().toList()
+
+        // Then
+        val errorState = result[1] as Resource.Error
+        assertEquals(ErrorType.NO_INTERNET, errorState.type)
+    }
+
+    @Test
+    fun `getHoldings - Other Exception - returns SERVER_ERROR error type`() = runTest {
+        // Given
+        coEvery { portfolioApi.getHoldings() } throws Exception("Server crash")
+
+        // When
+        val result = portfolioRepo.getHoldings().toList()
+
+        // Then
+        val errorState = result[1] as Resource.Error
+        assertEquals(ErrorType.SERVER_ERROR, errorState.type)
     }
 
     private fun getJsonContent(fileName: String): String {

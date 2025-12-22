@@ -37,13 +37,14 @@ class MainActivity : ComponentActivity() {
             val isOnline by viewModel.isOnline.collectAsStateWithLifecycle()
             val snackbarHostState = remember { SnackbarHostState() }
             val noInternetMessage = stringResource(R.string.error_no_internet)
+            val dismissLabel = stringResource(R.string.action_dismiss)
 
-            // Centralized observer for internet connectivity
             LaunchedEffect(isOnline) {
                 if (!isOnline) {
                     snackbarHostState.showSnackbar(
                         message = noInternetMessage,
-                        duration = SnackbarDuration.Indefinite
+                        actionLabel = dismissLabel,
+                        duration = SnackbarDuration.Short
                     )
                 } else {
                     snackbarHostState.currentSnackbarData?.dismiss()
@@ -82,7 +83,7 @@ fun AppNavigation(snackbarHostState: SnackbarHostState) {
             modifier = Modifier.padding(bottom = innerPadding.calculateBottomPadding())
         ) {
             composable("portfolio") {
-                PortfolioRoute()
+                PortfolioRoute(snackbarHostState = snackbarHostState)
             }
         }
     }
