@@ -25,7 +25,7 @@ import com.digicolor.rahuldemo.util.CurrencyUtils
 fun HeadingText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,
@@ -40,7 +40,8 @@ fun HeadingText(
 @Composable
 fun PrimaryText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,
@@ -48,7 +49,8 @@ fun PrimaryText(
         style = MaterialTheme.typography.titleMedium,
         fontWeight = FontWeight.SemiBold,
         maxLines = 1,
-        overflow = TextOverflow.Ellipsis
+        overflow = TextOverflow.Ellipsis,
+        color = color
     )
 }
 
@@ -70,7 +72,7 @@ fun SecondaryText(
 fun ValueText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,
@@ -84,13 +86,15 @@ fun ValueText(
 @Composable
 fun EmphasisText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,
         modifier = modifier,
         fontSize = 16.sp,
-        fontWeight = FontWeight.SemiBold
+        fontWeight = FontWeight.SemiBold,
+        color = color
     )
 }
 
@@ -112,13 +116,15 @@ fun BodyText(
 @Composable
 fun CaptionText(
     text: String,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurfaceVariant
 ) {
     Text(
         text = text,
         modifier = modifier,
         style = MaterialTheme.typography.labelSmall,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight.Medium,
+        color = color
     )
 }
 
@@ -148,7 +154,7 @@ fun PercentageText(
     val color = if (isPnL) {
         if (value >= 0) MaterialTheme.customColors.positiveValue else MaterialTheme.customColors.negativeValue
     } else {
-        Color.Unspecified
+        MaterialTheme.colorScheme.onSurface
     }
     Text(
         text = " (${String.format("%.2f", value)}%)",
@@ -172,7 +178,7 @@ fun StatusText(
         style = MaterialTheme.typography.bodyLarge,
         fontWeight = FontWeight.Medium,
         color = if (isPositive)
-            MaterialTheme.customColors.positiveValue  // Use custom colors
+            MaterialTheme.customColors.positiveValue
         else
             MaterialTheme.customColors.negativeValue
     )
@@ -182,6 +188,7 @@ fun StatusText(
 fun ValueTextRupee(
     value: Double,
     modifier: Modifier = Modifier,
+    color: Color = MaterialTheme.colorScheme.onSurface,
     decimalPlaces: Int = 2,
     showSymbol: Boolean = true
 ) {
@@ -196,7 +203,8 @@ fun ValueTextRupee(
         text = formattedValue,
         modifier = modifier,
         style = MaterialTheme.typography.bodyLarge,
-        fontWeight = FontWeight.Medium
+        fontWeight = FontWeight.Medium,
+        color = color
     )
 }
 

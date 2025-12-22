@@ -92,7 +92,8 @@ fun PortfolioScreen(
         topBar = { PortfolioTopBar() },
         bottomBar = {
             PortfolioSummaryView(
-                state = state,
+                summary = state.summary,
+                isExpanded = state.isExpanded,
                 onToggle = { onAction(PortfolioAction.ToggleSummary) })
         }
     ) { padding ->

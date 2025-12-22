@@ -137,10 +137,11 @@ fun PortfolioTabs(
 
 @Composable
 fun PortfolioSummaryView(
-    state: PortfolioUiState,
+    summary: PortfolioSummary?,
+    isExpanded : Boolean,
     onToggle: () -> Unit
 ) {
-    state.summary?.let { summary ->
+    summary?.let { summary ->
         val shape = RoundedCornerShape(topStart = roundedCorner, topEnd = roundedCorner)
         Surface(
             modifier = Modifier
@@ -159,7 +160,7 @@ fun PortfolioSummaryView(
                         interactionSource = remember { MutableInteractionSource() }) { onToggle() }
                     .padding(horizontal = Dimens.listItemHorizontal, vertical = Dimens.space12)
             ) {
-                AnimatedVisibility(visible = state.isExpanded) {
+                AnimatedVisibility(visible = isExpanded) {
                     Column {
                         SummaryRow(label = stringResource(R.string.current_value), value = summary.currentValue)
                         SummaryRow(label = stringResource(R.string.total_investment), value = summary.totalInvestment)
@@ -183,7 +184,7 @@ fun PortfolioSummaryView(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Icon(
-                            imageVector = if (state.isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                            imageVector = if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
                             contentDescription = null,
                             modifier = Modifier.size(24.dp),
                             tint = Color.Gray
@@ -235,18 +236,16 @@ private fun PortfolioSummaryViewPreview() {
             contentAlignment = Alignment.BottomStart
         ) {
             PortfolioSummaryView(
-                state = PortfolioUiState(
-                    summary = PortfolioSummary(
-                        currentValue = 101.0,
-                        totalInvestment = 1012.12,
-                        totalPnL = 2000.2,
-                        totalPnLPercentage = 2.2,
-                        todayPnL = -235.65,
-                        todayPnLPercentage = -0.84
-                    ), isExpanded = true
+                summary = PortfolioSummary(
+                    currentValue = 101.0,
+                    totalInvestment = 1012.12,
+                    totalPnL = 2000.2,
+                    totalPnLPercentage = 2.2,
+                    todayPnL = -235.65,
+                    todayPnLPercentage = -0.84
                 ),
+                isExpanded = true,
                 onToggle = {
-
                 }
             )
         }
