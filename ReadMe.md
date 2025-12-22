@@ -18,6 +18,7 @@ A modern, robust Android application built with Jetpack Compose that demonstrate
   - **Network Monitoring**: Centralized monitoring that prompts the user with a Snackbar when offline and auto-recovers when connectivity returns.
   - **Empty States**: Professional "No orders yet" placeholder with Lottie animations for empty tabs.
   - **Error Views**: Specific full-screen error states with Lottie animations when initial data load fails.
+  - **Automatic Retry**: if network fails the app tries to automatically call holdings api
 
 ## 🛠 Tech Stack
 
@@ -40,7 +41,10 @@ The project follows **Clean Architecture** principles to ensure scalability and 
 
 | Light Theme | Dark Theme | Error/Offline State |
 | :---: | :---: | :---: |
-| ![Light Mode Placeholder](https://via.placeholder.com/200x400?text=Light+Theme) | ![Dark Mode Placeholder](https://via.placeholder.com/200x400?text=Dark+Theme) | ![Error State Placeholder](https://via.placeholder.com/200x400?text=Error+State) |
+| ![Light Mode Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/0e4c7a23-fa8c-4d7c-a0dc-69c561e9042c" />
+) | ![Dark Mode Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/ef1c7aad-c03c-46e8-91e0-a13799c2181b" />
+) | ![Error State Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/8cd949fb-1f73-4585-8113-0d087c3e16f4" />
+) |
 
 ## 🧪 Testing
 
