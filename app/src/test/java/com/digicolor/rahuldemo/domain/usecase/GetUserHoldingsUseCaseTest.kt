@@ -27,8 +27,8 @@ class GetUserHoldingsUseCaseTest {
     fun `invoke should return Loading and Success states with Holdings list`() = runTest {
         // Given
         val holdings = listOf(
-            Holding("SYMBOL1", 10, 100.0, 90.0, 95.0),
-            Holding("SYMBOL2", 5, 200.0, 180.0, 190.0)
+            Holding("SYMBOL1", 10, 100.0, 90.0, 95.0, 100.0),
+            Holding("SYMBOL2", 5, 200.0, 180.0, 190.0, 100.0)
         )
         val flow = flowOf(
             Resource.Loading,

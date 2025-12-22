@@ -197,8 +197,8 @@ fun NoOrdersPlaceholder() {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        LottieLoader(R.raw.empty_ghost) // Using existing dummy for positions
-        BodyText(text = "No orders yet", color = Color.Gray)
+        LottieLoader(R.raw.empty_ghost)
+        BodyText(text = stringResource(R.string.no_orders_yet))
     }
 }
 
@@ -233,7 +233,8 @@ private fun PortfolioScreenPreview() {
                         quantity = 3,
                         lastTradedPrice = 119.10,
                         avgPrice = 114.80,
-                        closePrice = 115.0
+                        closePrice = 115.0,
+                        totalPnL = 2.0
                     )
                 ),
                 isExpanded = true,

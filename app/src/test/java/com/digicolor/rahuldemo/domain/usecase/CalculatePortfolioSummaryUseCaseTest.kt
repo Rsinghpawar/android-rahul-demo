@@ -24,14 +24,16 @@ class CalculatePortfolioSummaryUseCaseTest {
                 quantity = 10,
                 lastTradedPrice = 40.0,
                 avgPrice = 35.0,
-                closePrice = 38.0
+                closePrice = 38.0,
+                totalPnL = 50.0
             ),
             Holding(
                 symbol = "ICICI",
                 quantity = 5,
                 lastTradedPrice = 120.0,
                 avgPrice = 110.0,
-                closePrice = 115.0
+                closePrice = 115.0,
+                totalPnL = 50.0
             )
         )
         // Current Value: (40 * 10) + (120 * 5) = 400 + 600 = 1000
@@ -80,7 +82,8 @@ class CalculatePortfolioSummaryUseCaseTest {
                 quantity = 10,
                 lastTradedPrice = 10.0,
                 avgPrice = 0.0,
-                closePrice = 10.0
+                closePrice = 10.0,
+                totalPnL = 100.0
             )
         )
 
@@ -91,6 +94,6 @@ class CalculatePortfolioSummaryUseCaseTest {
         assertEquals(100.0, result.currentValue, 0.0)
         assertEquals(0.0, result.totalInvestment, 0.0)
         assertEquals(100.0, result.totalPnL, 0.0)
-        assertEquals(0.0, result.totalPnLPercentage, 0.0) // Handles division by zero
+        assertEquals(0.0, result.totalPnLPercentage, 0.0)
     }
 }

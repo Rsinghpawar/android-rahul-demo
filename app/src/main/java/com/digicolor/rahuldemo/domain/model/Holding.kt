@@ -8,9 +8,6 @@ data class Holding(
     val quantity: Int,
     val lastTradedPrice: Double,
     val avgPrice: Double,
-    val closePrice: Double
-) {
-
-    val totalPnL: Double
-        get() = (lastTradedPrice - avgPrice) * quantity
-}
+    val closePrice: Double,
+    val totalPnL : Double
+)

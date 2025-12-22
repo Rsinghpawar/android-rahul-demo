@@ -87,7 +87,8 @@ private fun StockListItemPreview() {
                         quantity = 20,
                         lastTradedPrice = 20000.0,
                         avgPrice = 20.0,
-                        closePrice = 19.0
+                        closePrice = 19.0,
+                        totalPnL = 2.0
                     )
                 )
                 StockListItem(
@@ -96,7 +97,8 @@ private fun StockListItemPreview() {
                         quantity = 20,
                         lastTradedPrice = 10.0,
                         avgPrice = 20.0,
-                        closePrice = 19.0
+                        closePrice = 19.0,
+                        totalPnL = 2.0
                     )
                 )
                 StockListItem(
@@ -105,7 +107,8 @@ private fun StockListItemPreview() {
                         quantity = 3,
                         lastTradedPrice = 23.0,
                         avgPrice = 20.0,
-                        closePrice = 19.0
+                        closePrice = 19.0,
+                        totalPnL = 2.0
                     )
                 )
             }

@@ -18,4 +18,5 @@
     <string name="msg_no_orders">No orders yet</string>
     <string name="something_went_wrong_on_our_end">Something went wrong on our end</string>
     <string name="an_unknown_error_occurred">An unknown error occurred</string>
+    <string name="no_orders_yet">No orders yet</string>
 </resources>
