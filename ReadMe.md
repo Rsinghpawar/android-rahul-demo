@@ -2,6 +2,12 @@
 
 A modern, robust Android application built with Jetpack Compose that demonstrates professional software engineering practices, including Clean Architecture, MVVM, and reactive programming.
 
+## 📸 Screenshots
+
+| Light Theme | Dark Theme | Error / Offline State |
+| :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/0e4c7a23-fa8c-4d7c-a0dc-69c561e9042c" width="250"/> | <img src="https://github.com/user-attachments/assets/ef1c7aad-c03c-46e8-91e0-a13799c2181b" width="250"/> | <img src="https://github.com/user-attachments/assets/8cd949fb-1f73-4585-8113-0d087c3e16f4" width="250"/> |
+
 ## 📱 Features
 
 - **Portfolio Overview**: View a detailed list of stock holdings with real-time calculations.
@@ -37,14 +43,7 @@ The project follows **Clean Architecture** principles to ensure scalability and 
 - **Domain Layer**: Pure Kotlin business logic containing Models and UseCases (e.g., `CalculatePortfolioSummaryUseCase`).
 - **Data Layer**: API definitions, Repository implementations, and Data Transfer Objects (DTOs) with Mappers.
 
-## 📸 Screenshots
 
-| Light Theme | Dark Theme | Error/Offline State |
-| :---: | :---: | :---: |
-| ![Light Mode Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/0e4c7a23-fa8c-4d7c-a0dc-69c561e9042c" />
-) | ![Dark Mode Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/ef1c7aad-c03c-46e8-91e0-a13799c2181b" />
-) | ![Error State Placeholder](<img width="1080" height="2340" alt="image" src="https://github.com/user-attachments/assets/8cd949fb-1f73-4585-8113-0d087c3e16f4" />
-) |
 
 ## 🧪 Testing
 
