@@ -180,7 +180,7 @@ fun PortfolioSummaryView(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         BodyText(
                             text = stringResource(R.string.profit_loss),
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Icon(
                             imageVector = if (state.isExpanded) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,

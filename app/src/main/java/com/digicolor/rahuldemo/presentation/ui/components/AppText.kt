@@ -99,7 +99,7 @@ fun EmphasisText(
 fun BodyText(
     text: String,
     modifier: Modifier = Modifier,
-    color: Color = Color.Unspecified
+    color: Color = MaterialTheme.colorScheme.onSurface
 ) {
     Text(
         text = text,

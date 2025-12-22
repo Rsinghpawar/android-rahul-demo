@@ -27,6 +27,7 @@ class HoldingMapperTest {
         assertEquals(150.0, result?.lastTradedPrice!!, 0.0)
         assertEquals(145.0, result.avgPrice, 0.0)
         assertEquals(148.0, result.closePrice, 0.0)
+        assertEquals(50.0, result.totalPnL, 0.0) // (150 - 145) * 10 = 50
     }
 
     @Test
