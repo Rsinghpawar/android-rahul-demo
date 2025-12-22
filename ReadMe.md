@@ -8,6 +8,14 @@ A modern, robust Android application built with Jetpack Compose that demonstrate
 | :---: | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/0e4c7a23-fa8c-4d7c-a0dc-69c561e9042c" width="250"/> | <img src="https://github.com/user-attachments/assets/ef1c7aad-c03c-46e8-91e0-a13799c2181b" width="250"/> | <img src="https://github.com/user-attachments/assets/8cd949fb-1f73-4585-8113-0d087c3e16f4" width="250"/> |
 
+<p>
+  <img src="https://github.com/user-attachments/assets/bee06a10-ea60-4c7d-b373-58f36df56bd9" width="250" />
+  <img src="https://github.com/user-attachments/assets/08f6dd79-4293-4298-9054-f14da53e8efc" width="250" />
+</p>
+
+
+
+
 ## 📱 Features
 
 - **Portfolio Overview**: View a detailed list of stock holdings with real-time calculations.
