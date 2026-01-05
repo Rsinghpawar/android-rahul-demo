@@ -85,7 +85,7 @@ fun PortfolioTopBar() {
                     modifier = Modifier.size(Dimens.iconSize)
                 )
             }
-            IconButton(onClick = { /* TODO */ }) {
+            IconButton(onClick = { /* TODO Search */ }) {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = null,
@@ -250,4 +250,10 @@ private fun PortfolioSummaryViewPreview() {
             )
         }
     }
+}
+
+@Preview
+@Composable
+private fun TopBarPreview() {
+    PortfolioTopBar()
 }

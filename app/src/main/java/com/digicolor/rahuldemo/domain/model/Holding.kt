@@ -1,8 +1,5 @@
 package com.digicolor.rahuldemo.domain.model
 
-import androidx.compose.runtime.Stable
-
-@Stable
 data class Holding(
     val symbol: String,
     val quantity: Int,
