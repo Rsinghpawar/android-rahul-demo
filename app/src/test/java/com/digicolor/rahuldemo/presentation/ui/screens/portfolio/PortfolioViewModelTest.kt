@@ -13,11 +13,8 @@ import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.StandardTestDispatcher
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -37,12 +34,11 @@ class PortfolioViewModelTest {
     private val calculatePortfolioSummaryUseCase: CalculatePortfolioSummaryUseCase = mockk()
     private val networkMonitor: NetworkMonitor = mockk()
 
-    private val testDispatcher = StandardTestDispatcher()
     private val isOnlineFlow = MutableStateFlow(true)
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(testDispatcher)
+        Dispatchers.setMain(StandardTestDispatcher())
         every { networkMonitor.isOnline } returns isOnlineFlow
     }
 
@@ -110,9 +106,6 @@ class PortfolioViewModelTest {
             calculatePortfolioSummaryUseCase,
             networkMonitor
         )
-        val job = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            viewModel.uiState.collect()
-        }
         advanceUntilIdle()
         assertEquals(ErrorType.SERVER_ERROR, viewModel.uiState.value.error)
 
@@ -122,7 +115,6 @@ class PortfolioViewModelTest {
 
         // Then
         assertNull(viewModel.uiState.value.error)
-        job.cancel()
     }
 
     @Test
