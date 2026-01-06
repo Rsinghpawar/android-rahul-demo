@@ -36,7 +36,7 @@ class PortfolioViewModelTest {
     private val getUserHoldingsUseCase: GetUserHoldingsUseCase = mockk()
     private val calculatePortfolioSummaryUseCase: CalculatePortfolioSummaryUseCase = mockk()
     private val networkMonitor: NetworkMonitor = mockk()
-    
+
     private val testDispatcher = StandardTestDispatcher()
     private val isOnlineFlow = MutableStateFlow(true)
 
@@ -60,10 +60,11 @@ class PortfolioViewModelTest {
         coEvery { calculatePortfolioSummaryUseCase(holdings) } returns summary
 
         // When
-        viewModel = PortfolioViewModel(getUserHoldingsUseCase, calculatePortfolioSummaryUseCase, networkMonitor)
-        val job = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            viewModel.uiState.collect()
-        }
+        viewModel = PortfolioViewModel(
+            getUserHoldingsUseCase,
+            calculatePortfolioSummaryUseCase,
+            networkMonitor
+        )
         advanceUntilIdle()
 
         // Then
@@ -71,31 +72,44 @@ class PortfolioViewModelTest {
         assertFalse(state.isLoading)
         assertEquals(holdings, state.holdings)
         assertEquals(summary, state.summary)
-        job.cancel()
     }
 
     @Test
     fun `loadHoldings updates state with error type when use case fails`() = runTest {
         // Given
-        coEvery { getUserHoldingsUseCase() } returns flowOf(Resource.Error("msg", ErrorType.NO_INTERNET))
+        coEvery { getUserHoldingsUseCase() } returns flowOf(
+            Resource.Error(
+                "msg",
+                ErrorType.NO_INTERNET
+            )
+        )
 
         // When
-        viewModel = PortfolioViewModel(getUserHoldingsUseCase, calculatePortfolioSummaryUseCase, networkMonitor)
-        val job = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            viewModel.uiState.collect()
-        }
+        viewModel = PortfolioViewModel(
+            getUserHoldingsUseCase,
+            calculatePortfolioSummaryUseCase,
+            networkMonitor
+        )
         advanceUntilIdle()
 
         // Then
         assertEquals(ErrorType.NO_INTERNET, viewModel.uiState.value.error)
-        job.cancel()
     }
 
     @Test
     fun `onAction ErrorConsumed clears error in state`() = runTest {
         // Given
-        coEvery { getUserHoldingsUseCase() } returns flowOf(Resource.Error("msg", ErrorType.SERVER_ERROR))
-        viewModel = PortfolioViewModel(getUserHoldingsUseCase, calculatePortfolioSummaryUseCase, networkMonitor)
+        coEvery { getUserHoldingsUseCase() } returns flowOf(
+            Resource.Error(
+                "msg",
+                ErrorType.SERVER_ERROR
+            )
+        )
+        viewModel = PortfolioViewModel(
+            getUserHoldingsUseCase,
+            calculatePortfolioSummaryUseCase,
+            networkMonitor
+        )
         val job = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
             viewModel.uiState.collect()
         }
@@ -115,12 +129,19 @@ class PortfolioViewModelTest {
     fun `automatic reload when internet comes back and state is empty error`() = runTest {
         // Given
         isOnlineFlow.value = false
-        coEvery { getUserHoldingsUseCase() } returns flowOf(Resource.Error("msg", ErrorType.NO_INTERNET))
-        
-        viewModel = PortfolioViewModel(getUserHoldingsUseCase, calculatePortfolioSummaryUseCase, networkMonitor)
-        val job = backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            viewModel.uiState.collect()
-        }
+        coEvery { getUserHoldingsUseCase() } returns flowOf(
+            Resource.Error(
+                "msg",
+                ErrorType.NO_INTERNET
+            )
+        )
+
+        viewModel = PortfolioViewModel(
+            getUserHoldingsUseCase,
+            calculatePortfolioSummaryUseCase,
+            networkMonitor
+        )
+
         advanceUntilIdle()
         assertEquals(ErrorType.NO_INTERNET, viewModel.uiState.value.error)
 
@@ -136,6 +157,5 @@ class PortfolioViewModelTest {
         // Then
         assertEquals(holdings, viewModel.uiState.value.holdings)
         assertNull(viewModel.uiState.value.error)
-        job.cancel()
     }
 }

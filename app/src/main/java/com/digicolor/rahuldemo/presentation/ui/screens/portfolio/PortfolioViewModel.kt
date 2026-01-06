@@ -30,16 +30,12 @@ class PortfolioViewModel @Inject constructor(
 
     private val _uiState = MutableStateFlow(PortfolioUiState())
     val uiState: StateFlow<PortfolioUiState> = _uiState.asStateFlow()
-        .onStart { loadHoldings() }
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
-            initialValue = PortfolioUiState(isLoading = true)
-        )
+
 
     private var loadJob: Job? = null
 
     init {
+        loadHoldings()
         monitorNetwork()
     }
 
